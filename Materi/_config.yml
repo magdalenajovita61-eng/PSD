@@ -1,0 +1,11 @@
+title: Proyek Sain Data
+author: Magdalena Jovita Hatuopar
+logo: lenaa.jpeg
+copyright: "2026"
+
+execute:
+  execute_notebooks: "off"
+
+html:
+  use_issues_button: false
+  use_repository_button: false
