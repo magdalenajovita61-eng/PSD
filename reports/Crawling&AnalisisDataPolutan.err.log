@@ -1,0 +1,133 @@
+Traceback (most recent call last):
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 1323, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/asyncio/base_events.py", line 684, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import ee
+import geopandas as gpd
+import pandas as pd
+
+PROJECT_ID = "proyek-sain-data"      # Google Cloud Project ID
+GEOJSON_PATH = "Tugas Pertama PSD.geojson"
+START_DATE = "2025-08-30"
+END_DATE = "2026-08-30"
+OUTPUT_CSV = "hasil_crawling_polutan.csv"
+
+def init_earth_engine():
+    try:
+        ee.Initialize(project=PROJECT_ID)
+    except Exception:
+        ee.Authenticate()
+        ee.Initialize(project=PROJECT_ID)
+
+init_earth_engine()
+------------------
+
+----- stderr -----
+(node:10883) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+------------------
+
+[31m---------------------------------------------------------------------------[39m
+[31mEEException[39m                               Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[4][39m[32m, line 13[39m, in [36minit_earth_engine[39m[34m()[39m
+[32m     12[39m [38;5;28;01mtry[39;00m:
+[32m---> [39m[32m13[39m     [43mee[49m[43m.[49m[43mInitialize[49m[43m([49m[43mproject[49m[43m=[49m[43mPROJECT_ID[49m[43m)[49m
+[32m     14[39m [38;5;28;01mexcept[39;00m [38;5;167;01mException[39;00m:
+
+[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/ee/_utils.py:39[39m, in [36maccept_opt_prefix.<locals>.opt_fixed.<locals>.wrapper[39m[34m(*args, **kwargs)[39m
+[32m     38[39m       kwargs[new_key] = old_key_val  [38;5;66;03m# pyrefly: ignore[unsupported-operation][39;00m
+[32m---> [39m[32m39[39m [38;5;28;01mreturn[39;00m [43mfunc[49m[43m([49m[43m*[49m[43margs[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkwargs[49m[43m)[49m
+
+[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/ee/__init__.py:227[39m, in [36mInitialize[39m[34m(credentials, url, cloud_api_key, http_transport, project)[39m
+[32m    226[39m [38;5;28;01mif[39;00m credentials == [33m'[39m[33mpersistent[39m[33m'[39m:
+[32m--> [39m[32m227[39m   credentials = [43mdata[49m[43m.[49m[43mget_persistent_credentials[49m[43m([49m[43m)[49m
+[32m    228[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m project [38;5;129;01mand[39;00m credentials [38;5;129;01mand[39;00m [38;5;28mhasattr[39m(credentials, [33m'[39m[33mquota_project_id[39m[33m'[39m):
+
+[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/ee/data.py:240[39m, in [36mget_persistent_credentials[39m[34m()[39m
+[32m    239[39m     [38;5;28;01mreturn[39;00m credentials
+[32m--> [39m[32m240[39m [38;5;28;01mraise[39;00m ee_exception.EEException(  [38;5;66;03m# pylint: disable=raise-missing-from[39;00m
+[32m    241[39m     [33m'[39m[33mPlease authorize access to your Earth Engine account by [39m[33m'[39m
+[32m    242[39m     [33m'[39m[33mrunning[39m[38;5;130;01m\n[39;00m[38;5;130;01m\n[39;00m[33mearthengine authenticate[39m[38;5;130;01m\n[39;00m[38;5;130;01m\n[39;00m[33m'[39m
+[32m    243[39m     [33m'[39m[33min your command line, or ee.Authenticate() in Python, and then retry.[39m[33m'[39m
+[32m    244[39m )
+
+[31mEEException[39m: Please authorize access to your Earth Engine account by running
+
+earthengine authenticate
+
+in your command line, or ee.Authenticate() in Python, and then retry.
+
+During handling of the above exception, another exception occurred:
+
+[31mStdinNotImplementedError[39m                  Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[4][39m[32m, line 18[39m
+[32m     15[39m         ee.Authenticate()
+[32m     16[39m         ee.Initialize(project=PROJECT_ID)
+[32m---> [39m[32m18[39m [43minit_earth_engine[49m[43m([49m[43m)[49m
+
+[36mCell[39m[36m [39m[32mIn[4][39m[32m, line 15[39m, in [36minit_earth_engine[39m[34m()[39m
+[32m     13[39m     ee.Initialize(project=PROJECT_ID)
+[32m     14[39m [38;5;28;01mexcept[39;00m [38;5;167;01mException[39;00m:
+[32m---> [39m[32m15[39m     [43mee[49m[43m.[49m[43mAuthenticate[49m[43m([49m[43m)[49m
+[32m     16[39m     ee.Initialize(project=PROJECT_ID)
+
+[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/ee/__init__.py:198[39m, in [36mAuthenticate[39m[34m(authorization_code, quiet, code_verifier, auth_mode, scopes, force)[39m
+[32m    167[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mAuthenticate[39m(
+[32m    168[39m     authorization_code: [38;5;28mstr[39m | [38;5;28;01mNone[39;00m = [38;5;28;01mNone[39;00m,
+[32m    169[39m     quiet: [38;5;28mbool[39m | [38;5;28;01mNone[39;00m = [38;5;28;01mNone[39;00m,
+[32m   (...)[39m[32m    173[39m     force: [38;5;28mbool[39m = [38;5;28;01mFalse[39;00m,
+[32m    174[39m ) -> [38;5;28mbool[39m | [38;5;28;01mNone[39;00m:
+[32m    175[39m [38;5;250m  [39m[33;03m"""Prompts the user to authorize access to Earth Engine via OAuth2.[39;00m
+[32m    176[39m 
+[32m    177[39m [33;03m  Args:[39;00m
+[32m   (...)[39m[32m    196[39m [33;03m    True if we found valid credentials and didn't run the auth flow.[39;00m
+[32m    197[39m [33;03m  """[39;00m
+[32m--> [39m[32m198[39m   [38;5;28;01mreturn[39;00m [43moauth[49m[43m.[49m[43mauthenticate[49m[43m([49m[43mauthorization_code[49m[43m,[49m[43m [49m[43mquiet[49m[43m,[49m[43m [49m[43mcode_verifier[49m[43m,[49m[43m [49m[43mauth_mode[49m[43m,[49m
+[32m    199[39m [43m                            [49m[43mscopes[49m[43m,[49m[43m [49m[43mforce[49m[43m)[49m
+
+[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/ee/oauth.py:580[39m, in [36mauthenticate[39m[34m(cli_authorization_code, quiet, cli_code_verifier, auth_mode, scopes, force)[39m
+[32m    577[39m [38;5;28;01mif[39;00m flow.display_instructions(quiet):
+[32m    578[39m   _open_new_browser(flow.auth_url)
+[32m--> [39m[32m580[39m [43mflow[49m[43m.[49m[43msave_code[49m[43m([49m[43m)[49m
+
+[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/ee/oauth.py:630[39m, in [36mFlow.save_code[39m[34m(self, code)[39m
+[32m    628[39m   redirect_uri = [38;5;28mself[39m.server.url
+[32m    629[39m   code = [38;5;28mself[39m.server.fetch_code()  [38;5;66;03m# Waits for oauth callback[39;00m
+[32m--> [39m[32m630[39m [43m_obtain_and_write_token[49m[43m([49m[43mcode[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[43m.[49m[43mcode_verifier[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[43m.[49m[43mscopes[49m[43m,[49m[43m [49m[43mredirect_uri[49m[43m)[49m
+
+[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/ee/oauth.py:277[39m, in [36m_obtain_and_write_token[39m[34m(auth_code, code_verifier, scopes, redirect_uri)[39m
+[32m    275[39m   client_info[[33m'[39m[33mredirect_uri[39m[33m'[39m] = redirect_uri
+[32m    276[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m auth_code:
+[32m--> [39m[32m277[39m   auth_code = [38;5;28;43minput[39;49m[43m([49m[33;43m'[39;49m[33;43mEnter verification code: [39;49m[33;43m'[39;49m[43m)[49m
+[32m    278[39m [38;5;28;01massert[39;00m [38;5;28misinstance[39m(auth_code, [38;5;28mstr[39m)
+[32m    279[39m scopes = scopes [38;5;129;01mor[39;00m SCOPES
+
+[36mFile [39m[32m~/.local/lib/python3.12/site-packages/ipykernel/kernelbase.py:1402[39m, in [36mKernel.raw_input[39m[34m(self, prompt)[39m
+[32m   1400[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28mself[39m._allow_stdin:
+[32m   1401[39m     msg = [33m"[39m[33mraw_input was called, but this frontend does not support input requests.[39m[33m"[39m
+[32m-> [39m[32m1402[39m     [38;5;28;01mraise[39;00m StdinNotImplementedError(msg)
+[32m   1403[39m [38;5;28;01mreturn[39;00m [38;5;28mself[39m._input_request(
+[32m   1404[39m     [38;5;28mstr[39m(prompt),
+[32m   1405[39m     [38;5;28mself[39m._get_shell_context_var([38;5;28mself[39m._shell_parent_ident),
+[32m   1406[39m     [38;5;28mself[39m.get_parent([33m"[39m[33mshell[39m[33m"[39m),
+[32m   1407[39m     password=[38;5;28;01mFalse[39;00m,
+[32m   1408[39m )
+
+[31mStdinNotImplementedError[39m: raw_input was called, but this frontend does not support input requests.
+
