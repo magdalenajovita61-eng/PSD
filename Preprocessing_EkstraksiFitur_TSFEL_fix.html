@@ -1,0 +1,1203 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Preprocessing &amp; Ekstraksi Fitur (TSFEL) &#8212; Proyek Sain Data</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Preprocessing_EkstraksiFitur_TSFEL_fix';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Laporan: Migrasi Data Time Series ke PostgreSQL (Aiven) dan Analisis Statistik Deskriptif di KNIME" href="MigrasiDataKNIME.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/lenaa.jpeg" class="logo__image only-light" alt="Proyek Sain Data - Home"/>
+    <img src="_static/lenaa.jpeg" class="logo__image only-dark pst-js-only" alt="Proyek Sain Data - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to the Proyek Sain Data Notes
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Crawling%26AnalisisDataPolutanMadiun.html">Crawling &amp; Analisis Data Polutan Udara di Kabupaten Madiun</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MigrasiDataKNIME.html">Laporan: Migrasi Data Time Series ke PostgreSQL (Aiven) dan Analisis Statistik Deskriptif di KNIME</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Preprocessing &amp; Ekstraksi Fitur (TSFEL)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Preprocessing_EkstraksiFitur_TSFEL_fix.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Preprocessing & Ekstraksi Fitur (TSFEL)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#studi-kasus-konsentrasi-no2-kecamatan-pilangkenceng-kabupaten-madiun">Studi Kasus: Konsentrasi NO2 — Kecamatan Pilangkenceng, Kabupaten Madiun</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-kerja">Alur Kerja</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-wilayah-sumber-data-kecamatan-pilangkenceng">1. Boundary Wilayah &amp; Sumber Data: Kecamatan Pilangkenceng</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">2. Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-outlier-metode-iqr">Deteksi Outlier (Metode IQR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imputasi-missing-value">Imputasi Missing Value</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-68-fitur-dengan-tsfel">3. Ekstraksi 68 Fitur dengan TSFEL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengelompokan-fitur-berdasarkan-domain">4. Pengelompokan Fitur Berdasarkan Domain</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#domain-statistical-20-fitur">Domain Statistical (20 fitur)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#domain-temporal-21-fitur-termasuk-kelompok-fraktal-kompleksitas-sinyal">Domain Temporal (21 fitur, termasuk kelompok fraktal/kompleksitas sinyal)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#domain-spectral-26-fitur">Domain Spectral (26 fitur)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unknown-belum-terklasifikasi-otomatis-1-fitur">Unknown / belum terklasifikasi otomatis (1 fitur)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-interpretasi">5. Hasil &amp; Interpretasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-umum">Interpretasi Umum</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="preprocessing-ekstraksi-fitur-tsfel">
+<h1>Preprocessing &amp; Ekstraksi Fitur (TSFEL)<a class="headerlink" href="#preprocessing-ekstraksi-fitur-tsfel" title="Link to this heading">#</a></h1>
+<section id="studi-kasus-konsentrasi-no2-kecamatan-pilangkenceng-kabupaten-madiun">
+<h2>Studi Kasus: Konsentrasi NO2 — Kecamatan Pilangkenceng, Kabupaten Madiun<a class="headerlink" href="#studi-kasus-konsentrasi-no2-kecamatan-pilangkenceng-kabupaten-madiun" title="Link to this heading">#</a></h2>
+<p><strong>Nama:</strong> Magdalena Jovita Hatuopar</p>
+<p><strong>NIM:</strong> 240411100078</p>
+</section>
+<section id="latar-belakang">
+<h2>Latar Belakang<a class="headerlink" href="#latar-belakang" title="Link to this heading">#</a></h2>
+<p>Melanjutkan Tugas 1 dan 2, tugas ini fokus pada satu fitur polutan (<strong>NO2</strong>) di wilayah
+<strong>Kecamatan Pilangkenceng, Kabupaten Madiun</strong></p>
+</section>
+<section id="alur-kerja">
+<h2>Alur Kerja<a class="headerlink" href="#alur-kerja" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Data NO2 di-crawl khusus untuk wilayah <strong>Kecamatan Pilangkenceng</strong> (Kabupaten Madiun,
+Jawa Timur), untuk rentang <strong>31 Agustus 2025 – 31 Agustus 2026</strong> (data harian, 1 tahun).</p></li>
+<li><p>Dilakukan <strong>preprocessing</strong>: deteksi outlier dan imputasi missing value.</p></li>
+<li><p>Data bersih diekstraksi menjadi <strong>68 fitur</strong> menggunakan library <strong>TSFEL</strong>
+(Time Series Feature Extraction Library).</p></li>
+<li><p>Fitur dikelompokkan berdasarkan domain: Statistical, Temporal, Spectral, dan Fractal.</p></li>
+<li><p>Hasil ekstraksi disimpan/diunggah ke sistem pengumpulan kelas.</p></li>
+</ol>
+</section>
+<section id="boundary-wilayah-sumber-data-kecamatan-pilangkenceng">
+<h2>1. Boundary Wilayah &amp; Sumber Data: Kecamatan Pilangkenceng<a class="headerlink" href="#boundary-wilayah-sumber-data-kecamatan-pilangkenceng" title="Link to this heading">#</a></h2>
+<p>Wilayah kajian adalah <strong>Kecamatan Pilangkenceng, Kabupaten Madiun, Provinsi Jawa Timur</strong>.
+Kecamatan ini dipilih karena merupakan domisili penulis. Karakter wilayahnya didominasi
+area <strong>pertanian dan permukiman pedesaan</strong>, sehingga sumber emisi NO2 di sini kemungkinan
+besar berasal dari lalu lintas kendaraan lokal dan aktivitas rumah tangga, bukan dari
+industri berat.</p>
+<p>Data NO2 diperoleh dari <strong>Sentinel-5P TROPOMI</strong> (band
+<code class="docutils literal notranslate"><span class="pre">tropospheric_NO2_column_number_density</span></code>, produk <code class="docutils literal notranslate"><span class="pre">COPERNICUS/S5P/OFFL/L3_NO2</span></code>) via
+<strong>Google Earth Engine</strong>, dipotong sesuai boundary GeoJSON resmi Kecamatan Pilangkenceng,
+untuk rentang <strong>31 Agustus 2025 – 31 Agustus 2026</strong> (harian). Proses crawling dilakukan
+terpisah (di Google Colab, karena butuh autentikasi akun Earth Engine) menggunakan script
+<code class="docutils literal notranslate"><span class="pre">crawling_NO2_Pilangkenceng.py</span></code> — inti logikanya ditampilkan di bawah ini sebagai referensi
+(tidak dijalankan ulang di notebook ini).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">import ee, json, time</span>
+<span class="sd">import pandas as pd</span>
+
+<span class="sd">GEOJSON_PATH   = &quot;Kecamatan Pilangkenceng-KECAMATAN.geojson&quot;</span>
+<span class="sd">KECAMATAN_NAME = &quot;Pilangkenceng&quot;</span>
+<span class="sd">START_DATE, END_DATE = &quot;2025-08-31&quot;, &quot;2026-08-31&quot;</span>
+<span class="sd">COLLECTION_ID = &quot;COPERNICUS/S5P/OFFL/L3_NO2&quot;</span>
+<span class="sd">BAND_NAME     = &quot;tropospheric_NO2_column_number_density&quot;</span>
+<span class="sd">SCALE_METERS  = 1113.2</span>
+
+<span class="sd">ee.Initialize(project=&quot;proyek-sain-data&quot;)</span>
+
+<span class="sd">with open(GEOJSON_PATH) as f:</span>
+<span class="sd">    geojson_data = json.load(f)</span>
+<span class="sd">geometry_dict = geojson_data[&quot;features&quot;][0][&quot;geometry&quot;]</span>
+<span class="sd">aoi = ee.Geometry(geometry_dict)  # (koordinat 3D di-strip ke 2D terlebih dahulu)</span>
+
+<span class="sd">no2_collection = (</span>
+<span class="sd">    ee.ImageCollection(COLLECTION_ID)</span>
+<span class="sd">    .select(BAND_NAME)</span>
+<span class="sd">    .filterDate(START_DATE, END_DATE)</span>
+<span class="sd">    .filterBounds(aoi)</span>
+<span class="sd">)</span>
+
+<span class="sd">def extract_mean_no2(image):</span>
+<span class="sd">    date = image.date().format(&quot;YYYY-MM-dd&quot;)</span>
+<span class="sd">    mean_dict = image.reduceRegion(</span>
+<span class="sd">        reducer=ee.Reducer.mean(), geometry=aoi,</span>
+<span class="sd">        scale=SCALE_METERS, maxPixels=1e9, bestEffort=True,</span>
+<span class="sd">    )</span>
+<span class="sd">    return ee.Feature(None, {&quot;date&quot;: date, &quot;NO2&quot;: mean_dict.get(BAND_NAME)})</span>
+
+<span class="sd">no2_fc = ee.FeatureCollection(no2_collection.map(extract_mean_no2))</span>
+<span class="sd"># ... diambil per-batch dengan retry, lalu di-reindex ke rentang harian penuh</span>
+<span class="sd"># (31-08-2025 s/d 31-08-2026) sehingga tanggal tanpa citra (tertutup awan)</span>
+<span class="sd"># otomatis menjadi NaN -&gt; inilah &quot;missing value&quot; yang diimputasi di Tugas 3.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ringkasan hasil crawling (dari log Colab):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total hari        : 366&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hari dengan data  : 229&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hari kosong (NaN) : 137  &lt;- diimputasi di tahap preprocessing&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ringkasan hasil crawling (dari log Colab):
+Total hari        : 366
+Hari dengan data  : 229
+Hari kosong (NaN) : 137  &lt;- diimputasi di tahap preprocessing
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="preprocessing">
+<h2>2. Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading">#</a></h2>
+<p>Dataset mentah (<code class="docutils literal notranslate"><span class="pre">NO2-Pilangkenceng.csv</span></code>) berisi nilai harian konsentrasi NO2 hasil
+crawling untuk Kecamatan Pilangkenceng, rentang <strong>31 Agustus 2025 – 31 Agustus 2026</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;NO2-Pilangkenceng.csv&quot;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah baris :&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rentang tanggal :&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah missing value awal :&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah baris : 366
+Rentang tanggal : 2025-08-31 - 2026-08-31
+Jumlah missing value awal : 137
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>NO2</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2025-08-31</th>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2025-09-01</th>
+      <td>0.000028</td>
+    </tr>
+    <tr>
+      <th>2025-09-02</th>
+      <td>0.000029</td>
+    </tr>
+    <tr>
+      <th>2025-09-03</th>
+      <td>0.000037</td>
+    </tr>
+    <tr>
+      <th>2025-09-04</th>
+      <td>0.000024</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#2b6a99&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Data NO2 Mentah - Kecamatan Pilangkenceng, Kab. Madiun&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Tanggal&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Konsentrasi NO2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6f5e71e55faaeaa00bb12be5d9460919ae03164b80f6f0141a47986305e2e03e.png" src="_images/6f5e71e55faaeaa00bb12be5d9460919ae03164b80f6f0141a47986305e2e03e.png" />
+</div>
+</div>
+<section id="deteksi-outlier-metode-iqr">
+<h3>Deteksi Outlier (Metode IQR)<a class="headerlink" href="#deteksi-outlier-metode-iqr" title="Link to this heading">#</a></h3>
+<p>Outlier dideteksi menggunakan metode <strong>Interquartile Range (IQR)</strong>:</p>
+<div class="math notranslate nohighlight">
+\[IQR = Q_3 - Q_1\]</div>
+<p>Data dianggap outlier jika berada di luar rentang:</p>
+<div class="math notranslate nohighlight">
+\[[\,Q_1 - 1.5 \times IQR,\ \ Q_3 + 1.5 \times IQR\,]\]</div>
+<p>Nilai yang terdeteksi sebagai outlier diubah menjadi kosong (NaN) terlebih dahulu, untuk
+kemudian diisi ulang pada tahap imputasi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Q1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">Q3</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+<span class="n">lower_bound</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+<span class="n">upper_bound</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+
+<span class="n">outlier_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower_bound</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper_bound</span><span class="p">)</span>
+<span class="n">n_outliers</span> <span class="o">=</span> <span class="n">outlier_mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Q1  = </span><span class="si">{</span><span class="n">Q1</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Q3  = </span><span class="si">{</span><span class="n">Q3</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;IQR = </span><span class="si">{</span><span class="n">IQR</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Batas bawah = </span><span class="si">{</span><span class="n">lower_bound</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Batas atas  = </span><span class="si">{</span><span class="n">upper_bound</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jumlah outlier terdeteksi: </span><span class="si">{</span><span class="n">n_outliers</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">df_clean</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_clean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">outlier_mask</span><span class="p">,</span> <span class="s2">&quot;NO2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total missing setelah outlier dikosongkan:&quot;</span><span class="p">,</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Q1  = 2.000892e-05
+Q3  = 3.104750e-05
+IQR = 1.103858e-05
+Batas bawah = 3.451052e-06
+Batas atas  = 4.760537e-05
+Jumlah outlier terdeteksi: 4
+Total missing setelah outlier dikosongkan: 141
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#b0b0b0&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data asli&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">outlier_mask</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">][</span><span class="n">outlier_mask</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Outlier&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">upper_bound</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Batas IQR&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">lower_bound</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Deteksi Outlier NO2 (Metode IQR) - Kec. Pilangkenceng&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Tanggal&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Konsentrasi NO2&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/88b948adbabe91ad9367c3b9b2b1e80dea35b1bef7ed15a120505910aaeeb553.png" src="_images/88b948adbabe91ad9367c3b9b2b1e80dea35b1bef7ed15a120505910aaeeb553.png" />
+</div>
+</div>
+</section>
+<section id="imputasi-missing-value">
+<h3>Imputasi Missing Value<a class="headerlink" href="#imputasi-missing-value" title="Link to this heading">#</a></h3>
+<p>Nilai kosong (baik dari data asli yang memang kosong — misal akibat tertutup awan pada
+citra satelit — maupun dari hasil deteksi outlier) diisi menggunakan:</p>
+<ol class="arabic simple">
+<li><p><strong>Interpolasi berbasis waktu</strong> (<code class="docutils literal notranslate"><span class="pre">interpolate(method='time')</span></code>) — mengisi celah dengan
+estimasi berdasarkan tren nilai di sekitarnya.</p></li>
+<li><p><strong>Forward-fill &amp; backward-fill</strong> — untuk mengisi sisa nilai kosong di ujung awal/akhir
+data yang tidak bisa diinterpolasi.</p></li>
+</ol>
+<p>Hasil akhir: dataset NO2 tanpa nilai kosong dan tanpa outlier, siap diekstraksi fiturnya.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_clean</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah missing value setelah imputasi:&quot;</span><span class="p">,</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">df_clean</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah missing value setelah imputasi: 0
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>NO2</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2025-08-31</th>
+      <td>0.000028</td>
+    </tr>
+    <tr>
+      <th>2025-09-01</th>
+      <td>0.000028</td>
+    </tr>
+    <tr>
+      <th>2025-09-02</th>
+      <td>0.000029</td>
+    </tr>
+    <tr>
+      <th>2025-09-03</th>
+      <td>0.000037</td>
+    </tr>
+    <tr>
+      <th>2025-09-04</th>
+      <td>0.000024</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#2ca02c&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Data NO2 Setelah Preprocessing (Outlier + Imputasi) - Kec. Pilangkenceng&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Tanggal&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Konsentrasi NO2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">df_clean</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;NO2-Pilangkenceng-Clean.csv&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tersimpan: NO2-Pilangkenceng-Clean.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/38c22f6555c76abbce8c71ce1af456cdfd2090718550e23b82a4963392439993.png" src="_images/38c22f6555c76abbce8c71ce1af456cdfd2090718550e23b82a4963392439993.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tersimpan: NO2-Pilangkenceng-Clean.csv
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="ekstraksi-68-fitur-dengan-tsfel">
+<h2>3. Ekstraksi 68 Fitur dengan TSFEL<a class="headerlink" href="#ekstraksi-68-fitur-dengan-tsfel" title="Link to this heading">#</a></h2>
+<p><strong>TSFEL (Time Series Feature Extraction Library)</strong> adalah pustaka Python yang secara
+otomatis menghitung ratusan jenis fitur karakteristik dari data deret waktu (time series)
+hanya dengan memanggil fungsi-fungsi fitur yang tersedia.</p>
+<p>Dari data NO2 Kecamatan Pilangkenceng (1 tahun, harian) yang sudah bersih, akan
+diekstraksi fitur menggunakan seluruh konfigurasi domain bawaan TSFEL — total
+<strong>68 fitur</strong>, setiap fitur meringkas satu karakteristik tertentu dari keseluruhan data
+setahun menjadi 1 angka (bukan lagi 1 angka per hari).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tsfel</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tsfel.feature_extraction.features</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tsfel_features</span>
+
+<span class="n">signal_1d</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="mi">1</span>  
+
+<span class="n">FEATURE_LIST</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;abs_energy auc autocorr average_power calc_centroid calc_max calc_mean</span>
+<span class="s2">calc_median calc_min calc_std calc_var dfa distance ecdf ecdf_percentile ecdf_percentile_count</span>
+<span class="s2">ecdf_slope entropy fundamental_frequency higuchi_fractal_dimension hist_mode human_range_energy</span>
+<span class="s2">hurst_exponent interq_range kurtosis lempel_ziv lpcc max_frequency max_power_spectrum</span>
+<span class="s2">maximum_fractal_length mean_abs_deviation mean_abs_diff mean_diff median_abs_deviation</span>
+<span class="s2">median_abs_diff median_diff median_frequency mfcc mse negative_turning neighbourhood_peaks</span>
+<span class="s2">petrosian_fractal_dimension pk_pk_distance positive_turning power_bandwidth rms skewness slope</span>
+<span class="s2">spectral_centroid spectral_decrease spectral_distance spectral_entropy spectral_kurtosis</span>
+<span class="s2">spectral_positive_turning spectral_roll_off spectral_roll_on spectral_skewness spectral_slope</span>
+<span class="s2">spectral_spread spectral_variation spectrogram_mean_coeff sum_abs_diff wavelet_abs_mean</span>
+<span class="s2">wavelet_energy wavelet_entropy wavelet_std wavelet_var zero_cross&quot;&quot;&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah fitur yang diminta:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">FEATURE_LIST</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">to_scalar</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fitur TSFEL yang menghasilkan banyak nilai (mis. MFCC, LPCC, wavelet per skala)</span>
+<span class="sd">    diringkas menjadi 1 nilai representatif lewat rata-rata.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;values&quot;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_one</span><span class="p">(</span><span class="n">fn_name</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">fs</span><span class="p">):</span>
+    <span class="n">fn</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">tsfel_features</span><span class="p">,</span> <span class="n">fn_name</span><span class="p">)</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span>
+    <span class="k">if</span> <span class="s2">&quot;fs&quot;</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">fs</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">to_scalar</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+
+<span class="n">row</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">fn_name</span> <span class="ow">in</span> <span class="n">FEATURE_LIST</span><span class="p">:</span>
+    <span class="n">row</span><span class="p">[</span><span class="n">fn_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">extract_one</span><span class="p">(</span><span class="n">fn_name</span><span class="p">,</span> <span class="n">signal_1d</span><span class="p">,</span> <span class="n">fs</span><span class="p">)</span>
+
+<span class="n">features_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">row</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Berhasil! Jumlah fitur yang dihasilkan untuk NO2: </span><span class="si">{</span><span class="n">features_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">features_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah fitur yang diminta: 68
+Berhasil! Jumlah fitur yang dihasilkan untuk NO2: 68
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>abs_energy</th>
+      <th>auc</th>
+      <th>autocorr</th>
+      <th>average_power</th>
+      <th>calc_centroid</th>
+      <th>calc_max</th>
+      <th>calc_mean</th>
+      <th>calc_median</th>
+      <th>calc_min</th>
+      <th>calc_std</th>
+      <th>...</th>
+      <th>spectral_spread</th>
+      <th>spectral_variation</th>
+      <th>spectrogram_mean_coeff</th>
+      <th>sum_abs_diff</th>
+      <th>wavelet_abs_mean</th>
+      <th>wavelet_energy</th>
+      <th>wavelet_entropy</th>
+      <th>wavelet_std</th>
+      <th>wavelet_var</th>
+      <th>zero_cross</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2.523118e-07</td>
+      <td>0.00919</td>
+      <td>2.0</td>
+      <td>6.912653e-10</td>
+      <td>202.684141</td>
+      <td>0.000047</td>
+      <td>0.000025</td>
+      <td>0.000024</td>
+      <td>0.000006</td>
+      <td>0.000007</td>
+      <td>...</td>
+      <td>0.14795</td>
+      <td>0.494503</td>
+      <td>8.950999e-11</td>
+      <td>0.001764</td>
+      <td>0.000002</td>
+      <td>0.000011</td>
+      <td>2.170957</td>
+      <td>0.000011</td>
+      <td>1.287795e-10</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 68 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;NO2_Pilangkenceng_TSFEL.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tersimpan: NO2_Pilangkenceng_TSFEL.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tersimpan: NO2_Pilangkenceng_TSFEL.csv
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="pengelompokan-fitur-berdasarkan-domain">
+<h2>4. Pengelompokan Fitur Berdasarkan Domain<a class="headerlink" href="#pengelompokan-fitur-berdasarkan-domain" title="Link to this heading">#</a></h2>
+<p>Pengelompokan domain diambil langsung dari <strong>konfigurasi resmi TSFEL</strong>
+(<code class="docutils literal notranslate"><span class="pre">tsfel.get_features_by_domain()</span></code>), bukan tebakan manual — persis seperti pada script
+<code class="docutils literal notranslate"><span class="pre">ekstraksi_fitur_TSFEL_NO2_Pilangkenceng.py</span></code>. Karena tugas ini hanya meminta 3 domain
+(Statistical, Temporal, Spectral), fitur-fitur yang secara bawaan berada di domain
+<code class="docutils literal notranslate"><span class="pre">fractal</span></code> (dfa, higuchi_fractal_dimension, hurst_exponent, maximum_fractal_length, mse,
+petrosian_fractal_dimension) digabungkan ke domain <strong>Temporal</strong>, karena secara konsep
+mengukur kompleksitas/kekasaran sinyal terhadap waktu.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cfg_all_domains</span> <span class="o">=</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">get_features_by_domain</span><span class="p">()</span>  
+
+<span class="n">function_to_domain</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">domain_name</span><span class="p">,</span> <span class="n">feats</span> <span class="ow">in</span> <span class="n">cfg_all_domains</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">feat_display_name</span><span class="p">,</span> <span class="n">feat_info</span> <span class="ow">in</span> <span class="n">feats</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">fn_full_name</span> <span class="o">=</span> <span class="n">feat_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">fn_short_name</span> <span class="o">=</span> <span class="n">fn_full_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">normalized_domain</span> <span class="o">=</span> <span class="s2">&quot;temporal&quot;</span> <span class="k">if</span> <span class="n">domain_name</span> <span class="o">==</span> <span class="s2">&quot;fractal&quot;</span> <span class="k">else</span> <span class="n">domain_name</span>
+        <span class="n">function_to_domain</span><span class="p">[</span><span class="n">fn_short_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">normalized_domain</span>
+
+<span class="n">domain_rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">fn_name</span> <span class="ow">in</span> <span class="n">FEATURE_LIST</span><span class="p">:</span>
+    <span class="n">domain</span> <span class="o">=</span> <span class="n">function_to_domain</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">fn_name</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">)</span>
+    <span class="n">domain_rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;feature&quot;</span><span class="p">:</span> <span class="n">fn_name</span><span class="p">,</span> <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="n">domain</span><span class="p">})</span>
+
+<span class="n">mapping_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">domain_rows</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ringkasan jumlah fitur per domain:&quot;</span><span class="p">)</span>
+<span class="n">domain_counts</span> <span class="o">=</span> <span class="n">mapping_df</span><span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">domain_counts</span><span class="p">)</span>
+
+<span class="n">unknown_feats</span> <span class="o">=</span> <span class="n">mapping_df</span><span class="p">[</span><span class="n">mapping_df</span><span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;unknown&quot;</span><span class="p">]</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">unknown_feats</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">PERHATIAN, fitur berikut tidak ketemu mapping domain-nya otomatis, &quot;</span>
+          <span class="s2">&quot;cek manual ke dokumentasi TSFEL:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">unknown_feats</span><span class="p">[</span><span class="s2">&quot;feature&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+<span class="n">mapping_df</span> <span class="o">=</span> <span class="n">mapping_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">&quot;domain&quot;</span><span class="p">,</span> <span class="s2">&quot;feature&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">mapping_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;NO2_Pilangkenceng_TSFEL_domain_mapping.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total fitur:&quot;</span><span class="p">,</span> <span class="n">domain_counts</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ringkasan jumlah fitur per domain:
+domain
+spectral       26
+temporal       21
+statistical    20
+unknown         1
+Name: count, dtype: int64
+
+PERHATIAN, fitur berikut tidak ketemu mapping domain-nya otomatis, cek manual ke dokumentasi TSFEL:
+[&#39;ecdf_slope&#39;]
+
+Total fitur: 68
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">domain_counts</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="s2">&quot;statistical&quot;</span><span class="p">,</span> <span class="s2">&quot;temporal&quot;</span><span class="p">,</span> <span class="s2">&quot;spectral&quot;</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;#4c72b0&quot;</span><span class="p">,</span> <span class="s2">&quot;#55a868&quot;</span><span class="p">,</span> <span class="s2">&quot;#c44e52&quot;</span><span class="p">,</span> <span class="s2">&quot;#999999&quot;</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Jumlah Fitur TSFEL per Domain - NO2 Kec. Pilangkenceng&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Jumlah fitur&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Domain&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/05569da85eda576cc65fca51eebadd7b1211527b39939e82d7893ac76cfc1c1a.png" src="_images/05569da85eda576cc65fca51eebadd7b1211527b39939e82d7893ac76cfc1c1a.png" />
+</div>
+</div>
+<section id="domain-statistical-20-fitur">
+<h3>Domain Statistical (20 fitur)<a class="headerlink" href="#domain-statistical-20-fitur" title="Link to this heading">#</a></h3>
+<p>Fitur yang mendeskripsikan sebaran nilai data secara keseluruhan, tanpa memperhatikan urutan waktu.</p>
+<p><code class="docutils literal notranslate"><span class="pre">abs_energy,</span> <span class="pre">average_power,</span> <span class="pre">calc_max,</span> <span class="pre">calc_mean,</span> <span class="pre">calc_median,</span> <span class="pre">calc_min,</span> <span class="pre">calc_std,</span> <span class="pre">calc_var,</span> <span class="pre">ecdf,</span> <span class="pre">ecdf_percentile,</span> <span class="pre">ecdf_percentile_count,</span> <span class="pre">entropy,</span> <span class="pre">hist_mode,</span> <span class="pre">interq_range,</span> <span class="pre">kurtosis,</span> <span class="pre">mean_abs_deviation,</span> <span class="pre">median_abs_deviation,</span> <span class="pre">pk_pk_distance,</span> <span class="pre">rms,</span> <span class="pre">skewness</span></code></p>
+</section>
+<section id="domain-temporal-21-fitur-termasuk-kelompok-fraktal-kompleksitas-sinyal">
+<h3>Domain Temporal (21 fitur, termasuk kelompok fraktal/kompleksitas sinyal)<a class="headerlink" href="#domain-temporal-21-fitur-termasuk-kelompok-fraktal-kompleksitas-sinyal" title="Link to this heading">#</a></h3>
+<p>Fitur yang menangkap pola perubahan nilai dari waktu ke waktu, termasuk fitur yang mengukur
+kompleksitas/self-similarity sinyal (dfa, higuchi_fractal_dimension, hurst_exponent,
+maximum_fractal_length, mse, petrosian_fractal_dimension).</p>
+<p><code class="docutils literal notranslate"><span class="pre">auc,</span> <span class="pre">autocorr,</span> <span class="pre">calc_centroid,</span> <span class="pre">dfa,</span> <span class="pre">distance,</span> <span class="pre">higuchi_fractal_dimension,</span> <span class="pre">hurst_exponent,</span> <span class="pre">lempel_ziv,</span> <span class="pre">maximum_fractal_length,</span> <span class="pre">mean_abs_diff,</span> <span class="pre">mean_diff,</span> <span class="pre">median_abs_diff,</span> <span class="pre">median_diff,</span> <span class="pre">mse,</span> <span class="pre">negative_turning,</span> <span class="pre">neighbourhood_peaks,</span> <span class="pre">petrosian_fractal_dimension,</span> <span class="pre">positive_turning,</span> <span class="pre">slope,</span> <span class="pre">sum_abs_diff,</span> <span class="pre">zero_cross</span></code></p>
+</section>
+<section id="domain-spectral-26-fitur">
+<h3>Domain Spectral (26 fitur)<a class="headerlink" href="#domain-spectral-26-fitur" title="Link to this heading">#</a></h3>
+<p>Fitur berbasis transformasi frekuensi (FFT/wavelet), menangkap pola periodik/musiman dalam data.</p>
+<p><code class="docutils literal notranslate"><span class="pre">fundamental_frequency,</span> <span class="pre">human_range_energy,</span> <span class="pre">lpcc,</span> <span class="pre">max_frequency,</span> <span class="pre">max_power_spectrum,</span> <span class="pre">median_frequency,</span> <span class="pre">mfcc,</span> <span class="pre">power_bandwidth,</span> <span class="pre">spectral_centroid,</span> <span class="pre">spectral_decrease,</span> <span class="pre">spectral_distance,</span> <span class="pre">spectral_entropy,</span> <span class="pre">spectral_kurtosis,</span> <span class="pre">spectral_positive_turning,</span> <span class="pre">spectral_roll_off,</span> <span class="pre">spectral_roll_on,</span> <span class="pre">spectral_skewness,</span> <span class="pre">spectral_slope,</span> <span class="pre">spectral_spread,</span> <span class="pre">spectral_variation,</span> <span class="pre">spectrogram_mean_coeff,</span> <span class="pre">wavelet_abs_mean,</span> <span class="pre">wavelet_energy,</span> <span class="pre">wavelet_entropy,</span> <span class="pre">wavelet_std,</span> <span class="pre">wavelet_var</span></code></p>
+</section>
+<section id="unknown-belum-terklasifikasi-otomatis-1-fitur">
+<h3>Unknown / belum terklasifikasi otomatis (1 fitur)<a class="headerlink" href="#unknown-belum-terklasifikasi-otomatis-1-fitur" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ecdf_slope</span></code> — fitur ini tersedia hasil ekstraksinya, namun tidak ketemu pemetaan domain
+otomatis di script (perlu dicek manual ke dokumentasi TSFEL bila diperlukan untuk laporan).</p>
+<p><strong>Ringkasan:</strong> Statistical (20) + Temporal (21) + Spectral (26) + Unknown (1) = <strong>68 fitur</strong></p>
+</section>
+</section>
+<section id="hasil-interpretasi">
+<h2>5. Hasil &amp; Interpretasi<a class="headerlink" href="#hasil-interpretasi" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">show</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">features_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">:</span><span class="s2">&gt;20s</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">val</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;calc_mean&quot;</span><span class="p">,</span> <span class="s2">&quot;calc_std&quot;</span><span class="p">,</span> <span class="s2">&quot;skewness&quot;</span><span class="p">,</span> <span class="s2">&quot;kurtosis&quot;</span><span class="p">,</span> <span class="s2">&quot;spectral_entropy&quot;</span><span class="p">,</span> <span class="s2">&quot;autocorr&quot;</span><span class="p">,</span> <span class="s2">&quot;hurst_exponent&quot;</span><span class="p">,</span> <span class="s2">&quot;zero_cross&quot;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">features_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">show</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           calc_mean : 2.519545e-05
+            calc_std : 7.386862e-06
+            skewness : 3.288613e-01
+            kurtosis : -6.212190e-02
+    spectral_entropy : 8.439107e-01
+            autocorr : 2.000000e+00
+      hurst_exponent : 7.360008e-01
+          zero_cross : 0.000000e+00
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Interpretasi nilai kunci</strong> (angka aktual mengikuti hasil eksekusi sel di atas):</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">calc_mean</span></code></strong> (rata-rata NO2 setahun) berada pada orde <strong>10⁻⁵</strong>. Baseline polusi NO2
+di Kecamatan Pilangkenceng tergolong rendah sepanjang tahun — konsisten dengan karakter
+wilayah yang didominasi pertanian dan permukiman, bukan kawasan industri.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">calc_std</span></code></strong> (variasi NO2) juga berorde <strong>10⁻⁶ – 10⁻⁵</strong>, menunjukkan fluktuasi yang
+moderat: ada naik-turun harian/mingguan, tetapi tidak ekstrem.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">spectral_entropy</span></code></strong> mendekati 1 (misalnya di kisaran 0.8) mengindikasikan pola NO2
+cenderung <strong>acak</strong>, tidak terlalu periodik. Artinya sumber emisi di wilayah ini
+kemungkinan bercampur (lalu lintas lokal, aktivitas rumah tangga, sedikit aktivitas
+pertanian musiman) tanpa siklus harian/mingguan yang sangat dominan.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">autocorr</span></code></strong> yang kecil menunjukkan ada sedikit pola berulang, namun tidak terlalu
+kuat — kemungkinan terkait pola aktivitas harian penduduk (jam sibuk pagi–sore), tapi
+tidak sekuat wilayah perkotaan dengan lalu lintas padat.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">hurst_exponent</span></code></strong> &gt; 0.5 mengindikasikan deret NO2 memiliki sifat <em>persistent</em>
+(kecenderungan trend jangka pendek cenderung berlanjut), meski efeknya tidak dominan.</p></li>
+</ul>
+</section>
+<section id="interpretasi-umum">
+<h2>Interpretasi Umum<a class="headerlink" href="#interpretasi-umum" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Transportasi</strong>: kemungkinan menjadi salah satu faktor, namun tidak sepadat wilayah
+industri/perkotaan — tercermin dari mean yang rendah dan entropy yang tinggi (acak).</p></li>
+<li><p><strong>Pertanian</strong>: Kecamatan Pilangkenceng yang didominasi lahan pertanian tidak
+menunjukkan pola musiman NO2 yang sangat kuat dari data ini.</p></li>
+<li><p><strong>Kehidupan sehari-hari</strong>: ada sedikit pola berulang (autocorr), kemungkinan terkait
+jam aktivitas penduduk, namun tidak konsisten sepanjang tahun.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="MigrasiDataKNIME.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Laporan: Migrasi Data Time Series ke PostgreSQL (Aiven) dan Analisis Statistik Deskriptif di KNIME</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#studi-kasus-konsentrasi-no2-kecamatan-pilangkenceng-kabupaten-madiun">Studi Kasus: Konsentrasi NO2 — Kecamatan Pilangkenceng, Kabupaten Madiun</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-kerja">Alur Kerja</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-wilayah-sumber-data-kecamatan-pilangkenceng">1. Boundary Wilayah &amp; Sumber Data: Kecamatan Pilangkenceng</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">2. Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-outlier-metode-iqr">Deteksi Outlier (Metode IQR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imputasi-missing-value">Imputasi Missing Value</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-68-fitur-dengan-tsfel">3. Ekstraksi 68 Fitur dengan TSFEL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengelompokan-fitur-berdasarkan-domain">4. Pengelompokan Fitur Berdasarkan Domain</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#domain-statistical-20-fitur">Domain Statistical (20 fitur)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#domain-temporal-21-fitur-termasuk-kelompok-fraktal-kompleksitas-sinyal">Domain Temporal (21 fitur, termasuk kelompok fraktal/kompleksitas sinyal)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#domain-spectral-26-fitur">Domain Spectral (26 fitur)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unknown-belum-terklasifikasi-otomatis-1-fitur">Unknown / belum terklasifikasi otomatis (1 fitur)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-interpretasi">5. Hasil &amp; Interpretasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-umum">Interpretasi Umum</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Magdalena Jovita Hatuopar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
