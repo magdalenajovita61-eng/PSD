@@ -954,8 +954,6 @@ GABUNGAN (204 fitur)      204              37                    100.0          
 </section>
 <section id="kesimpulan">
 <h2>Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h2>
-<p><em>(Angka di bawah mengacu ke tabel &amp; grafik pada Bagian 7 — akan terisi otomatis
-setelah dijalankan dengan data asli.)</em></p>
 <ul class="simple">
 <li><p><strong>Jumlah cluster terbaik pada dataset gabungan 204 fitur (PCA 37D):</strong> lihat
 <code class="docutils literal notranslate"><span class="pre">best_k_pca_204</span></code> dan nilai silhouette-nya di Bagian 3-4.</p></li>
@@ -983,7 +981,7 @@ sebagai pembagian kelompok yang solid.</p></li>
 <h2>8. Deskripsi Fitur: Daftar 68 Fitur TSFEL, Penjelasan RMS &amp; Skewness, dan Perhitungan Manual<a class="headerlink" href="#deskripsi-fitur-daftar-68-fitur-tsfel-penjelasan-rms-skewness-dan-perhitungan-manual" title="Link to this heading">#</a></h2>
 <section id="daftar-68-fitur-tsfel">
 <h3>8.1 Daftar 68 Fitur TSFEL<a class="headerlink" href="#daftar-68-fitur-tsfel" title="Link to this heading">#</a></h3>
-<p>Fitur yang diekstraksi kelas berjumlah 68, terbagi ke dalam 4 domain TSFEL. Tabel berikut jadi rujukan singkat untuk memahami posisi <em>rms</em> dan <em>skewness</em> (fitur yang ditugaskan ke Magdalena) di antara fitur-fitur lain yang diekstraksi teman sekelas. Di semua fungsi, signal adalah array 1 dimensi dan fs adalah frekuensi sampling (Hz). Beberapa fitur menghasilkan lebih dari satu nilai — ecdf, ecdf_percentile, ecdf_percentile_count, lpcc, mfcc, spectrogram_mean_coeff, dan semua wavelet_* kecuali wavelet_entropy — nilai-nilai itu diringkas jadi satu angka (rata-rata) saat diekstraksi lewat <code class="docutils literal notranslate"><span class="pre">ekstraksi_fitur_3polutan_Pilangkenceng.py</span></code>.</p>
+<p>Fitur yang diekstraksi kelas berjumlah 68, terbagi ke dalam 4 domain TSFEL. Tabel berikut jadi rujukan singkat untuk memahami posisi <em>rms</em> dan <em>skewness</em> di antara fitur-fitur lain. Di semua fungsi, signal adalah array 1 dimensi dan fs adalah frekuensi sampling (Hz). Beberapa fitur menghasilkan lebih dari satu nilai — ecdf, ecdf_percentile, ecdf_percentile_count, lpcc, mfcc, spectrogram_mean_coeff, dan semua wavelet_* kecuali wavelet_entropy — nilai-nilai itu diringkas jadi satu angka (rata-rata) saat diekstraksi lewat <code class="docutils literal notranslate"><span class="pre">ekstraksi_fitur_3polutan_Pilangkenceng.py</span></code>.</p>
 <p><strong>A. Fitur Statistik (19)</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
