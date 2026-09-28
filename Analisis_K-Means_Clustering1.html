@@ -60,11 +60,10 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Analisis_K-Means_Clustering';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Analisis_K-Means_Clustering1';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Preprocessing &amp; Ekstraksi Fitur (TSFEL)" href="Preprocessing_EkstraksiFitur_TSFEL.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -166,6 +165,8 @@
       
       
       
+        
+      
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
@@ -218,11 +219,11 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Crawling%26AnalisisDataPolutanMadiun.html">Crawling &amp; Analisis Data Polutan Udara di Kabupaten Madiun</a></li>
 <li class="toctree-l1"><a class="reference internal" href="MigrasiDataKNIME.html">Laporan: Migrasi Data Time Series ke PostgreSQL (Aiven) dan Analisis Statistik Deskriptif di KNIME</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Preprocessing_EkstraksiFitur_TSFEL.html">Preprocessing &amp; Ekstraksi Fitur (TSFEL)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">K-Means Clustering pada Data Polutan Udara: Implementasi Python dan KNIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Analisis_K-Means_Clustering.html">K-Means Clustering pada Data Polutan Udara: Implementasi Python dan KNIME</a></li>
 </ul>
 
     </div>
@@ -282,7 +283,7 @@
       
       
       
-      <li><a href="_sources/Analisis_K-Means_Clustering.ipynb" target="_blank"
+      <li><a href="_sources/Analisis_K-Means_Clustering1.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -378,15 +379,9 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengulang-analisis-yang-sama-pada-68-fitur-per-polutan-terpisah">6. Mengulang Analisis yang Sama pada 68 Fitur per Polutan (Terpisah)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-akhir-204-fitur-gabungan-vs-68-fitur-per-polutan">7. Perbandingan Akhir: 204 Fitur Gabungan vs 68 Fitur per Polutan</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-fitur-daftar-68-fitur-tsfel-penjelasan-rms-skewness-dan-perhitungan-manual">8. Deskripsi Fitur: Daftar 68 Fitur TSFEL, Penjelasan RMS &amp; Skewness, dan Perhitungan Manual</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daftar-68-fitur-tsfel">8.1 Daftar 68 Fitur TSFEL</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-detail-fitur-rms-dan-skewness">8.2 Penjelasan Detail Fitur RMS dan Skewness</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-rms-root-mean-square">a. RMS (Root Mean Square)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-skewness-kemiringan-distribusi">b. Skewness (Kemiringan Distribusi)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-perbandingan-singkat">c. Perbandingan Singkat</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual-di-excel-rms-skewness">8.3 Perhitungan Manual di Excel (RMS &amp; Skewness)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-fitur-daftar-68-fitur-tsfel-perhitungan-manual-rms-skewness">8. Deskripsi Fitur: Daftar 68 Fitur TSFEL &amp; Perhitungan Manual (RMS &amp; Skewness)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daftar-68-fitur-tsfel-per-domain">8.1 Daftar 68 Fitur TSFEL (per Domain)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual-di-excel-rms-skewness">8.2 Perhitungan Manual di Excel (RMS &amp; Skewness)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-paralel-dengan-tools-knime-analytics-platform">9. Implementasi Paralel dengan Tools: KNIME Analytics Platform</a><ul class="nav section-nav flex-column">
@@ -979,11 +974,11 @@ sebagai pembagian kelompok yang solid.</p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section id="deskripsi-fitur-daftar-68-fitur-tsfel-penjelasan-rms-skewness-dan-perhitungan-manual">
-<h2>8. Deskripsi Fitur: Daftar 68 Fitur TSFEL, Penjelasan RMS &amp; Skewness, dan Perhitungan Manual<a class="headerlink" href="#deskripsi-fitur-daftar-68-fitur-tsfel-penjelasan-rms-skewness-dan-perhitungan-manual" title="Link to this heading">#</a></h2>
-<section id="daftar-68-fitur-tsfel">
-<h3>8.1 Daftar 68 Fitur TSFEL<a class="headerlink" href="#daftar-68-fitur-tsfel" title="Link to this heading">#</a></h3>
-<p>Fitur yang diekstraksi kelas berjumlah 68, terbagi ke dalam 4 domain TSFEL. Tabel berikut jadi rujukan singkat untuk memahami posisi <em>rms</em> dan <em>skewness</em> (fitur yang ditugaskan ke Magdalena) di antara fitur-fitur lain yang diekstraksi teman sekelas. Di semua fungsi, signal adalah array 1 dimensi dan fs adalah frekuensi sampling (Hz). Beberapa fitur menghasilkan lebih dari satu nilai — ecdf, ecdf_percentile, ecdf_percentile_count, lpcc, mfcc, spectrogram_mean_coeff, dan semua wavelet_* kecuali wavelet_entropy — nilai-nilai itu diringkas jadi satu angka (rata-rata) saat diekstraksi lewat <code class="docutils literal notranslate"><span class="pre">ekstraksi_fitur_3polutan_Pilangkenceng.py</span></code>.</p>
+<section id="deskripsi-fitur-daftar-68-fitur-tsfel-perhitungan-manual-rms-skewness">
+<h2>8. Deskripsi Fitur: Daftar 68 Fitur TSFEL &amp; Perhitungan Manual (RMS &amp; Skewness)<a class="headerlink" href="#deskripsi-fitur-daftar-68-fitur-tsfel-perhitungan-manual-rms-skewness" title="Link to this heading">#</a></h2>
+<section id="daftar-68-fitur-tsfel-per-domain">
+<h3>8.1 Daftar 68 Fitur TSFEL (per Domain)<a class="headerlink" href="#daftar-68-fitur-tsfel-per-domain" title="Link to this heading">#</a></h3>
+<p>Fitur yang diekstraksi kelas berjumlah 68, terbagi ke dalam 4 domain TSFEL. Tabel berikut jadi rujukan singkat untuk memahami posisi <code class="docutils literal notranslate"><span class="pre">rms</span></code> dan <code class="docutils literal notranslate"><span class="pre">skewness</span></code> (fitur yang ditugaskan ke Magdalena) di antara fitur-fitur lain yang diekstraksi teman sekelas. Di semua fungsi, <code class="docutils literal notranslate"><span class="pre">signal</span></code> adalah array 1 dimensi dan <code class="docutils literal notranslate"><span class="pre">fs</span></code> adalah frekuensi sampling (Hz). Beberapa fitur menghasilkan lebih dari satu nilai — <code class="docutils literal notranslate"><span class="pre">ecdf</span></code>, <code class="docutils literal notranslate"><span class="pre">ecdf_percentile</span></code>, <code class="docutils literal notranslate"><span class="pre">ecdf_percentile_count</span></code>, <code class="docutils literal notranslate"><span class="pre">lpcc</span></code>, <code class="docutils literal notranslate"><span class="pre">mfcc</span></code>, <code class="docutils literal notranslate"><span class="pre">spectrogram_mean_coeff</span></code>, dan semua <code class="docutils literal notranslate"><span class="pre">wavelet_*</span></code> kecuali <code class="docutils literal notranslate"><span class="pre">wavelet_entropy</span></code> — nilai-nilai itu diringkas jadi satu angka (rata-rata) saat diekstraksi lewat <code class="docutils literal notranslate"><span class="pre">ekstraksi_fitur_3polutan_Pilangkenceng.py</span></code>.</p>
 <p><strong>A. Fitur Statistik (19)</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -1305,149 +1300,8 @@ sebagai pembagian kelompok yang solid.</p></li>
 </table>
 </div>
 </section>
-<section id="penjelasan-detail-fitur-rms-dan-skewness">
-<h3>8.2 Penjelasan Detail Fitur RMS dan Skewness<a class="headerlink" href="#penjelasan-detail-fitur-rms-dan-skewness" title="Link to this heading">#</a></h3>
-<p>Dua fitur ini yang jadi bagian saya. Keduanya sama-sama fitur statistik, dihitung langsung dari nilai amplitudo (dalam kasus ini kadar polutan harian) tanpa melihat urutan waktunya.</p>
-<section id="a-rms-root-mean-square">
-<h4>a. RMS (Root Mean Square)<a class="headerlink" href="#a-rms-root-mean-square" title="Link to this heading">#</a></h4>
-<p><strong>Gambaran umum.</strong> RMS adalah ukuran “besar efektif” dari sebuah sinyal. Kalau sinyal naik-turun di sekitar nol, rata-rata biasa hampir 0 karena bagian positif dan negatif saling menghapus, padahal sinyalnya sebenarnya besar. RMS mengatasi ini dengan mengkuadratkan semua nilai dulu supaya tidak ada yang negatif, lalu dirata-rata, lalu diakarkan agar satuannya kembali ke satuan asli sinyal.</p>
-<p><strong>Rumus</strong> (sama dengan kode TSFEL):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>RMS = √( (1/N) · Σ xᵢ² )
-</pre></div>
-</div>
-<p><strong>Langkah menghitung:</strong></p>
-<ol class="arabic simple">
-<li><p>Kuadratkan setiap sampel (xᵢ²).</p></li>
-<li><p>Jumlahkan semuanya (Σ xᵢ²).</p></li>
-<li><p>Bagi dengan jumlah sampel N.</p></li>
-<li><p>Akarkan hasilnya.</p></li>
-</ol>
-<p><strong>Contoh hitungan</strong> untuk <code class="docutils literal notranslate"><span class="pre">signal</span> <span class="pre">=</span> <span class="pre">[2,</span> <span class="pre">4,</span> <span class="pre">6,</span> <span class="pre">8,</span> <span class="pre">10]</span></code>:</p>
-<ul class="simple">
-<li><p>Kuadrat: 4, 16, 36, 64, 100</p></li>
-<li><p>Jumlah = 220, dibagi N = 5 jadi 44</p></li>
-<li><p>RMS = √44 ≈ <strong>6,633</strong> (mean-nya sendiri 6)</p></li>
-</ul>
-<p>Contoh lain, gelombang sinus dengan amplitudo A punya RMS = A/√2 ≈ 0,707·A. Untuk A = 3, RMS-nya 2,121, sedangkan mean-nya 0.</p>
-<p><strong>Hubungan dengan mean dan varians.</strong> Ada identitas yang berguna:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>RMS² = mean² + varians
-</pre></div>
-</div>
-<p>Artinya RMS gabungan dari dua hal: seberapa jauh sinyal dari nol (mean) dan seberapa lebar sebarannya (varians). Kalau mean = 0, RMS sama dengan standar deviasi. Kalau ada offset, RMS ikut naik sementara std tidak. Misalnya sinus A = 3 ditambah offset 2 memberi RMS = √(2² + 4,5) ≈ 2,915, padahal std-nya tetap 2,121. Identitas ini bisa dipakai untuk mengecek hasil hitungan, dan pada data polutan saya cocok. Untuk CO: mean² = 8,768 × 10⁻⁴ ditambah m₂ = 1,0708 × 10⁻⁵ menghasilkan 8,875 × 10⁻⁴, sama dengan Σx²/N pada tabel 8.3.</p>
-<p><strong>Cara membaca nilainya.</strong></p>
-<ul class="simple">
-<li><p>Semakin besar RMS, semakin besar amplitudo efektif sinyal. Pada data polutan, RMS yang besar berarti kadar polutan cenderung tinggi secara keseluruhan.</p></li>
-<li><p>Perbandingan RMS terhadap mean menunjukkan seberapa bervariasi datanya. Kalau RMS hampir sama dengan mean, datanya stabil di sekitar rata-ratanya. Kalau RMS jauh di atas mean, ada nilai-nilai besar yang menaikkannya. Di data ini, RMS CO cuma sekitar 1,006 kali mean-nya, NO2 sekitar 1,054 kali, sedangkan SO2 sekitar 1,75 kali. Jadi SO2 paling bervariasi.</p></li>
-<li><p>RMS lebih peka terhadap nilai ekstrem daripada rata-rata absolut, karena nilai besar dikuadratkan.</p></li>
-</ul>
-<p><strong>Hal yang perlu diperhatikan.</strong></p>
-<ul class="simple">
-<li><p>RMS bergantung pada skala data. Kadar CO (orde 10⁻²) dan NO2 (orde 10⁻⁵) beda jauh, jadi tidak bisa dibandingkan mentah-mentah. Itu sebabnya sebelum PCA dan K-Means fiturnya distandardisasi dulu (Bagian 1).</p></li>
-<li><p>RMS tidak peduli urutan waktu. Kalau data harian diacak, nilainya tetap sama.</p></li>
-<li><p>Data negatif tetap aman dipakai karena dikuadratkan.</p></li>
-</ul>
-</section>
-<section id="b-skewness-kemiringan-distribusi">
-<h4>b. Skewness (Kemiringan Distribusi)<a class="headerlink" href="#b-skewness-kemiringan-distribusi" title="Link to this heading">#</a></h4>
-<p><strong>Gambaran umum.</strong> Skewness mengukur seberapa simetris sebaran nilai di sekitar mean-nya. Kalau nilai-nilainya seimbang di kiri dan kanan mean, skewness mendekati 0. Kalau ada ekor panjang ke satu sisi, skewness menjauhi 0, dengan tanda yang menunjukkan arah ekornya.</p>
-<p><strong>Rumus</strong> (TSFEL memakai <code class="docutils literal notranslate"><span class="pre">scipy.stats.skew</span></code>):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>skewness = m₃ / σ³ = [ (1/N) Σ (xᵢ − μ)³ ] / [ (1/N) Σ (xᵢ − μ)² ]^(3/2)
-</pre></div>
-</div>
-<p>Pangkat tiga pada pembilang mempertahankan tanda selisih terhadap mean: selisih di atas mean tetap positif, di bawah mean tetap negatif. Karena dipangkatkan tiga, selisih yang besar berpengaruh jauh lebih kuat daripada selisih kecil, jadi nilai ekstrem yang menentukan arahnya. Pembagian dengan σ³ membuat hasilnya tanpa satuan, sehingga bisa dibandingkan antar polutan yang skalanya berbeda.</p>
-<p><strong>Langkah menghitung:</strong></p>
-<ol class="arabic simple">
-<li><p>Hitung mean μ.</p></li>
-<li><p>Hitung selisih tiap sampel terhadap mean (xᵢ − μ).</p></li>
-<li><p>Pangkatkan dua lalu rata-ratakan untuk mendapat m₂ (varians populasi).</p></li>
-<li><p>Pangkatkan tiga lalu rata-ratakan untuk mendapat m₃.</p></li>
-<li><p>Bagi m₃ dengan m₂^(3/2).</p></li>
-</ol>
-<p><strong>Contoh hitungan</strong> untuk <code class="docutils literal notranslate"><span class="pre">signal</span> <span class="pre">=</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">20]</span></code>:</p>
-<ul class="simple">
-<li><p>Mean μ = 6, deviasi = −5, −4, −3, −2, +14</p></li>
-<li><p>Pangkat tiga: −125, −64, −27, −8, +2744, jumlah = 2520, jadi m₃ = 2520/5 = 504</p></li>
-<li><p>Pangkat dua: 25, 16, 9, 4, 196, jumlah = 250, jadi m₂ = 50 dan σ³ = 50^1,5 ≈ 353,55</p></li>
-<li><p>Skewness = 504 / 353,55 ≈ <strong>1,426</strong></p></li>
-</ul>
-<p>Hasilnya positif karena nilai 20 menarik ekor distribusi ke kanan. Sebagai pembanding, <code class="docutils literal notranslate"><span class="pre">[2,</span> <span class="pre">4,</span> <span class="pre">6,</span> <span class="pre">8,</span> <span class="pre">10]</span></code> yang simetris memberi skewness 0, dan <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">10]</span></code> memberi 1,604.</p>
-<p><strong>Cara membaca nilainya.</strong></p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Nilai</p></th>
-<th class="head"><p>Arti</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>≈ 0</p></td>
-<td><p>Distribusi simetris (contoh: gelombang sinus)</p></td>
-</tr>
-<tr class="row-odd"><td><p>&gt; 0 (positif)</p></td>
-<td><p>Ekor panjang ke kanan: sebagian besar data rendah, ada beberapa nilai tinggi yang menarik mean ke atas (biasanya mean &gt; median)</p></td>
-</tr>
-<tr class="row-even"><td><p>&lt; 0 (negatif)</p></td>
-<td><p>Ekor panjang ke kiri: sebagian besar data tinggi, ada beberapa nilai sangat rendah</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Aturan praktis yang sering dipakai: |skew| di bawah 0,5 dianggap kira-kira simetris, 0,5 sampai 1 miring sedang, dan di atas 1 miring kuat. Ini pedoman kasar, bukan aturan baku.</p>
-<p><strong>Pada data polutan.</strong> Skewness CO, NO2, dan SO2 semuanya positif (0,25; 0,33; 0,82). Artinya di ketiga polutan kebanyakan hari kadarnya rendah, dengan sedikit hari yang kadarnya tinggi. Pola ini masuk akal untuk data pencemar: kejadian tinggi (misalnya saat ada sumber emisi atau kondisi atmosfer tertentu) jarang terjadi, sedangkan kondisi normal lebih sering. Skewness SO2 paling besar, sejalan dengan RMS-nya yang paling jauh di atas mean.</p>
-<p><strong>Hal yang perlu diperhatikan.</strong></p>
-<ul class="simple">
-<li><p>Skewness tidak berubah kalau sinyal digeser (ditambah konstanta) atau dikali angka positif. Kalau sinyal dibalik (dikali −1), tandanya ikut berbalik.</p></li>
-<li><p>Sensitif terhadap outlier karena selisih dipangkatkan tiga.</p></li>
-<li><p>Sinyal konstan (σ = 0) menghasilkan <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p></li>
-<li><p>Sama seperti RMS, skewness hanya melihat distribusi nilai, bukan urutan waktunya.</p></li>
-<li><p>Jangan tertukar dengan <code class="docutils literal notranslate"><span class="pre">spectral_skewness</span></code> (no. 59), yang mengukur kemiringan di domain frekuensi, bukan distribusi amplitudo.</p></li>
-</ul>
-</section>
-<section id="c-perbandingan-singkat">
-<h4>c. Perbandingan Singkat<a class="headerlink" href="#c-perbandingan-singkat" title="Link to this heading">#</a></h4>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Aspek</p></th>
-<th class="head"><p>RMS</p></th>
-<th class="head"><p>Skewness</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Yang diukur</p></td>
-<td><p>Besar efektif (amplitudo keseluruhan)</p></td>
-<td><p>Simetri distribusi</p></td>
-</tr>
-<tr class="row-odd"><td><p>Satuan</p></td>
-<td><p>Sama dengan satuan sinyal</p></td>
-<td><p>Tanpa satuan</p></td>
-</tr>
-<tr class="row-even"><td><p>Rentang nilai</p></td>
-<td><p>≥ 0</p></td>
-<td><p>Bisa negatif, nol, atau positif</p></td>
-</tr>
-<tr class="row-odd"><td><p>Bergantung pada skala</p></td>
-<td><p>Ya</p></td>
-<td><p>Tidak (untuk skala positif)</p></td>
-</tr>
-<tr class="row-even"><td><p>Terpengaruh offset</p></td>
-<td><p>Ya</p></td>
-<td><p>Tidak</p></td>
-</tr>
-<tr class="row-odd"><td><p>Sensitif outlier</p></td>
-<td><p>Ya (dikuadratkan)</p></td>
-<td><p>Sangat (dipangkatkan tiga)</p></td>
-</tr>
-<tr class="row-even"><td><p>Melihat urutan waktu</p></td>
-<td><p>Tidak</p></td>
-<td><p>Tidak</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Keduanya saling melengkapi: RMS bilang seberapa besar kadarnya, skewness bilang bagaimana bentuk sebaran kadar itu. Skewness biasanya dibaca bersama <code class="docutils literal notranslate"><span class="pre">kurtosis</span></code> (ketebalan ekor) dan <code class="docutils literal notranslate"><span class="pre">calc_std</span></code> (sebaran).</p>
-</section>
-</section>
 <section id="perhitungan-manual-di-excel-rms-skewness">
-<h3>8.3 Perhitungan Manual di Excel (RMS &amp; Skewness)<a class="headerlink" href="#perhitungan-manual-di-excel-rms-skewness" title="Link to this heading">#</a></h3>
+<h3>8.2 Perhitungan Manual di Excel (RMS &amp; Skewness)<a class="headerlink" href="#perhitungan-manual-di-excel-rms-skewness" title="Link to this heading">#</a></h3>
 <p>Sebelum masuk ke KNIME, saya coba hitung manual dulu di Excel biar ada pembandingnya. Rumusnya saya buat hidup (pakai referensi sel), jadi bisa ditelusuri baris per baris kalau mau dicek. Hasilnya cocok persis dengan fungsi <code class="docutils literal notranslate"><span class="pre">rms()</span></code> dan <code class="docutils literal notranslate"><span class="pre">skewness()</span></code> di TSFEL, selisihnya nol.</p>
 <p><strong>Hasil akhir</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -1644,15 +1498,6 @@ Includes: 36 kolom komponen PCA (PCA dim 0 s.d. PCA dim 35)</p>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="Preprocessing_EkstraksiFitur_TSFEL.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Preprocessing &amp; Ekstraksi Fitur (TSFEL)</p>
-      </div>
-    </a>
 </div>
                 </footer>
               
@@ -1681,15 +1526,9 @@ Includes: 36 kolom komponen PCA (PCA dim 0 s.d. PCA dim 35)</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengulang-analisis-yang-sama-pada-68-fitur-per-polutan-terpisah">6. Mengulang Analisis yang Sama pada 68 Fitur per Polutan (Terpisah)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-akhir-204-fitur-gabungan-vs-68-fitur-per-polutan">7. Perbandingan Akhir: 204 Fitur Gabungan vs 68 Fitur per Polutan</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-fitur-daftar-68-fitur-tsfel-penjelasan-rms-skewness-dan-perhitungan-manual">8. Deskripsi Fitur: Daftar 68 Fitur TSFEL, Penjelasan RMS &amp; Skewness, dan Perhitungan Manual</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daftar-68-fitur-tsfel">8.1 Daftar 68 Fitur TSFEL</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-detail-fitur-rms-dan-skewness">8.2 Penjelasan Detail Fitur RMS dan Skewness</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-rms-root-mean-square">a. RMS (Root Mean Square)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-skewness-kemiringan-distribusi">b. Skewness (Kemiringan Distribusi)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-perbandingan-singkat">c. Perbandingan Singkat</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual-di-excel-rms-skewness">8.3 Perhitungan Manual di Excel (RMS &amp; Skewness)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-fitur-daftar-68-fitur-tsfel-perhitungan-manual-rms-skewness">8. Deskripsi Fitur: Daftar 68 Fitur TSFEL &amp; Perhitungan Manual (RMS &amp; Skewness)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daftar-68-fitur-tsfel-per-domain">8.1 Daftar 68 Fitur TSFEL (per Domain)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual-di-excel-rms-skewness">8.2 Perhitungan Manual di Excel (RMS &amp; Skewness)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-paralel-dengan-tools-knime-analytics-platform">9. Implementasi Paralel dengan Tools: KNIME Analytics Platform</a><ul class="nav section-nav flex-column">
