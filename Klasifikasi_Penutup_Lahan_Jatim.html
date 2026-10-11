@@ -431,13 +431,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implikasi-kebijakan-dan-catatan-kualitas-hasil">7.3 Implikasi kebijakan dan catatan kualitas hasil</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sistem-informasi-streamlit-dan-web-statis">8. Sistem Informasi: Streamlit dan Web Statis</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aplikasi-streamlit">8.1 Aplikasi Streamlit</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-yang-dibaca-aplikasi">8.2 Data yang dibaca aplikasi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#panduan-deploy">8.3 Panduan deploy</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-catatan-dan-keterbatasan">9. Kesimpulan, Catatan, dan Keterbatasan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-catatan-dan-keterbatasan">8. Kesimpulan, Catatan, dan Keterbatasan</a></li>
 </ul>
             </nav>
         </div>
@@ -4323,80 +4317,8 @@ Akurasi CV tertinggi  : SVM (RBF) (96.01%)
 </ul>
 </section>
 </section>
-<section id="sistem-informasi-streamlit-dan-web-statis">
-<h2>8. Sistem Informasi: Streamlit dan Web Statis<a class="headerlink" href="#sistem-informasi-streamlit-dan-web-statis" title="Link to this heading">#</a></h2>
-<section id="aplikasi-streamlit">
-<h3>8.1 Aplikasi Streamlit<a class="headerlink" href="#aplikasi-streamlit" title="Link to this heading">#</a></h3>
-<p><a class="reference external" href="https://lulc-jatim-njdu8ic5w8zcxph8yhzqfh.streamlit.app/">https://lulc-jatim-njdu8ic5w8zcxph8yhzqfh.streamlit.app/</a></p>
-<p>Halaman: Data Understanding (tujuan, kolekting data, band, fitur dan rumus, acuan KLHK/SNI, jumlah data) · Proses · Hasil Model (perbandingan 8 algoritma, matriks konfusi, precision/recall/F1, feature importance) · Peta Klasifikasi (Folium + Google Satellite, luas per kelas).</p>
-</section>
-<section id="data-yang-dibaca-aplikasi">
-<h3>8.2 Data yang dibaca aplikasi<a class="headerlink" href="#data-yang-dibaca-aplikasi" title="Link to this heading">#</a></h3>
-<p><strong>Halaman Data Understanding: jumlah data, kelas, training dan testing</strong></p>
-<p><img alt="Halaman Data Understanding: jumlah data, kelas, training dan testing" src="attachment:app_data.png" /></p>
-<p><strong>Halaman Data Understanding: sebaran poligon sampel (Google Satellite)</strong></p>
-<p><img alt="Halaman Data Understanding: sebaran poligon sampel (Google Satellite)" src="attachment:app_sampel.png" /></p>
-<p><strong>Halaman Hasil Model: perbandingan 8 algoritma</strong></p>
-<p><img alt="Halaman Hasil Model: perbandingan 8 algoritma" src="attachment:app_model.png" /></p>
-<p><strong>Akurasi uji per model</strong></p>
-<p><img alt="Akurasi uji per model" src="attachment:app_bar.png" /></p>
-<p><strong>Matriks konfusi XGBoost</strong></p>
-<p><img alt="Matriks konfusi XGBoost" src="attachment:app_cm.png" /></p>
-<p><strong>Precision, recall, F1 per kelas</strong></p>
-<p><img alt="Precision, recall, F1 per kelas" src="attachment:app_report.png" /></p>
-<p><strong>Feature importance</strong></p>
-<p><img alt="Feature importance" src="attachment:app_imp.png" /></p>
-<p><strong>Halaman Peta Klasifikasi: 4 ROI di atas Google Satellite</strong></p>
-<p><img alt="Halaman Peta Klasifikasi: 4 ROI di atas Google Satellite" src="attachment:app_peta.png" /></p>
-<p><strong>Luas per kelas (tabel)</strong></p>
-<p><img alt="Luas per kelas (tabel)" src="attachment:app_luas.png" /></p>
-<p><strong>Luas per kelas (grafik)</strong></p>
-<p><img alt="Luas per kelas (grafik)" src="attachment:app_luas_bar.png" /></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">DATA</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)):</span>
-    <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="ow">and</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s2">&quot;.gitkeep&quot;</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">DATA</span><span class="p">))</span><span class="si">:</span><span class="s2">45s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span><span class="o">/</span><span class="mi">1024</span><span class="si">:</span><span class="s2">9.1f</span><span class="si">}</span><span class="s2"> KB&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>classification_report.csv                           0.7 KB
-confusion_matrix.csv                                0.2 KB
-dataset_fitur.csv                                2584.3 KB
-feature_importance.csv                              1.1 KB
-model_results.csv                                   1.0 KB
-raw/Danau.geojson                                  64.9 KB
-raw/Lahan_ijo2.geojson                             13.1 KB
-raw/Mangrove.geojson                               73.3 KB
-raw/bangunan.geojson                               21.0 KB
-raw/laut.geojson                                   14.2 KB
-raw/sawah_Jawa_Timur.geojson                       35.0 KB
-roi/lumajang_ranu_klasifikasi.png                 326.2 KB
-roi/malang_selatan_klasifikasi.png                200.2 KB
-roi/mojokerto_jombang_klasifikasi.png             337.1 KB
-roi/surabaya_sidoarjo_klasifikasi.png             405.8 KB
-roi_meta.json                                       5.2 KB
-samples_all.geojson                               296.8 KB
-split_summary.json                                  0.6 KB
-titik_sampel.geojson                             1312.9 KB
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="panduan-deploy">
-<h3>8.3 Panduan deploy<a class="headerlink" href="#panduan-deploy" title="Link to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p>Push folder proyek (termasuk <code class="docutils literal notranslate"><span class="pre">data/</span></code> dan model) ke repo GitHub.</p></li>
-<li><p><a class="reference external" href="https://share.streamlit.io">https://share.streamlit.io</a> → <em>New app</em> → pilih repo, branch, file utama <code class="docutils literal notranslate"><span class="pre">app.py</span></code>.</p></li>
-<li><p>Lokal: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span> <span class="pre">&amp;&amp;</span> <span class="pre">streamlit</span> <span class="pre">run</span> <span class="pre">app.py</span></code>.</p></li>
-</ol>
-<p><strong>Web statis:</strong> halaman proses dan peta (<code class="docutils literal notranslate"><span class="pre">peta_klasifikasi.html</span></code> dari sel 7.2) dapat diunggah ke GitHub Pages (<em>Settings → Pages → folder /docs</em>) tanpa server.</p>
-</section>
-</section>
 <section id="kesimpulan-catatan-dan-keterbatasan">
-<h2>9. Kesimpulan, Catatan, dan Keterbatasan<a class="headerlink" href="#kesimpulan-catatan-dan-keterbatasan" title="Link to this heading">#</a></h2>
+<h2>8. Kesimpulan, Catatan, dan Keterbatasan<a class="headerlink" href="#kesimpulan-catatan-dan-keterbatasan" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;accuracy&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -4551,13 +4473,7 @@ Fitur terpenting: NDMI, elevation, B8, NDVI, B12
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implikasi-kebijakan-dan-catatan-kualitas-hasil">7.3 Implikasi kebijakan dan catatan kualitas hasil</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sistem-informasi-streamlit-dan-web-statis">8. Sistem Informasi: Streamlit dan Web Statis</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aplikasi-streamlit">8.1 Aplikasi Streamlit</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-yang-dibaca-aplikasi">8.2 Data yang dibaca aplikasi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#panduan-deploy">8.3 Panduan deploy</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-catatan-dan-keterbatasan">9. Kesimpulan, Catatan, dan Keterbatasan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-catatan-dan-keterbatasan">8. Kesimpulan, Catatan, dan Keterbatasan</a></li>
 </ul>
   </nav></div>
 
